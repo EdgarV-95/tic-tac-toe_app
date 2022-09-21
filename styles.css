@@ -1,0 +1,16 @@
+body{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+td {
+    background-color: black;
+    border: 1px solid black;
+    width: 7.5vw;
+    height: 15vh;
+}
+
+.test {
+    background-color: white;
+}
