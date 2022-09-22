@@ -10,7 +10,21 @@ const controlFlow = () => {
             })
         })
     }
-    return {move}
+    // Check
+    const playGame = () => {
+        let x = document.querySelectorAll('.X')
+        let o = document.querySelectorAll('.O')
+        console.log()
+        if ( x.length > o.length  ) {
+            console.log('swap to O')
+            game.move('cell O', 'O')
+        }
+        if ( o.length >= x.length ) {
+            console.log('swap to X')
+            game.move('cell X','X')
+        }
+    }
+    return {move, playGame}
 }
 
 // Reset
@@ -22,23 +36,4 @@ document.querySelector('.reset').addEventListener('click', () => {
 
 let game = controlFlow()
 game.move('cell X','X')
-
-// Check
-const playGame = () => {
-    let x = document.body.querySelectorAll('.X')
-    let o = document.body.querySelectorAll('.O')
-    console.log(x)
-    if ( document.querySelector('.X').textContent ) {
-        console.log('swap to O')
-        game.move('cell O', 'O')
-        x.classList = 'cell'
-    } else
-    if ( document.querySelector('.O').textContent ) {
-        console.log('swap to X')
-        game.move('cell X','X')
-        o.innerHTML = 'cell'
-    } else {
-        console.log('Im done')
-    }
-}
-document.querySelector('.check').addEventListener('click', playGame)
+document.querySelector('.container').addEventListener('click', game.playGame)
