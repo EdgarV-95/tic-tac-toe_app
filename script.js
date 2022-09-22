@@ -1,11 +1,11 @@
 // Create object with 2 functions one for X and one for O
-let allTds = document.querySelectorAll('td')
+let allTds = document.querySelectorAll('.cell')
 
 const controlFlow = () => {
-    const move = (option) => {
+    const move = (mark, option) => {
         allTds.forEach(el => {
             el.addEventListener('click', () => {
-                // el.innerHTML = '<p>X</p>'
+                el.classList = mark
                 el.innerHTML = option
             })
         })
@@ -13,17 +13,32 @@ const controlFlow = () => {
     return {move}
 }
 
-document.querySelector('button').addEventListener('click', () => {
+// Reset
+document.querySelector('.reset').addEventListener('click', () => {
     allTds.forEach(el => {
         el.innerHTML = ''
     })
 })
 
-let test1 = controlFlow()
-moveX = test1.move('<p>X</p>')
-moveO = test1.move('<p>O</p>')
-console.log(moveX)
-console.log(moveO)
+let game = controlFlow()
+game.move('cell X','X')
 
-const orderArr = [moveX, moveO, moveX, moveO, moveX, moveO, moveX, moveO, moveX]
-orderArr.forEach(el => el)
+// Check
+const playGame = () => {
+    let x = document.body.querySelectorAll('.X')
+    let o = document.body.querySelectorAll('.O')
+    console.log(x)
+    if ( document.querySelector('.X').textContent ) {
+        console.log('swap to O')
+        game.move('cell O', 'O')
+        x.classList = 'cell'
+    } else
+    if ( document.querySelector('.O').textContent ) {
+        console.log('swap to X')
+        game.move('cell X','X')
+        o.innerHTML = 'cell'
+    } else {
+        console.log('Im done')
+    }
+}
+document.querySelector('.check').addEventListener('click', playGame)

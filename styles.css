@@ -4,7 +4,13 @@ body{
     justify-content: center;
 }
 
-td {
+.container {
+    display: flex;
+}
+
+.cell,
+.O,
+.X {
     border: 1px solid black;
     width: 7.5vw;
     height: 15vh;
