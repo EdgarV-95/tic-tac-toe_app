@@ -16,12 +16,5 @@ body{
     height: 15vh;
 }
 
-.test {
-    background-color: white;
-}
-
-p {
-    display: flex;
-    justify-content: center;
-    font-size: 4vh;
-}
+.O { color: blue;}
+.X { color: red;}

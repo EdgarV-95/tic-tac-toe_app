@@ -14,7 +14,7 @@ const controlFlow = () => {
     const playGame = () => {
         let x = document.querySelectorAll('.X')
         let o = document.querySelectorAll('.O')
-        console.log()
+        console.log(x)
         if ( x.length > o.length  ) {
             console.log('swap to O')
             game.move('cell O', 'O')
@@ -23,6 +23,8 @@ const controlFlow = () => {
             console.log('swap to X')
             game.move('cell X','X')
         }
+        x.classList = 'cell'
+        o.classList = 'cell' 
     }
     return {move, playGame}
 }
