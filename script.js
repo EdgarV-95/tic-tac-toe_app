@@ -16,7 +16,8 @@ const gameBoard = (() => {
     <div index="7" class="cell"></div>
     <div index="8" class="cell"></div>
     `
-    document.querySelector('h1').appendChild(container);
+    // Inert the table after the h1 tag
+    document.querySelector('h1').insertAdjacentElement('afterend', container)
 })()
 
 // This module contains all the game logic
