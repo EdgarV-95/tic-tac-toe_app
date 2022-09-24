@@ -1,20 +1,12 @@
-body{
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-}
-
 .container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: 10vw;
+    margin: auto;
 }
 
-.cell,
-.O,
-.X {
+.cell {
     border: 1px solid black;
     width: 7.5vw;
     height: 15vh;
 }
-
-.O { color: blue;}
-.X { color: red;}
