@@ -29,10 +29,12 @@ h1 {
     display: grid;
     grid-template-columns: repeat(3, auto);
     border: 2px solid black;
+    box-shadow: 2px 2px 2px 2px;
 }
 
 .cell {
     border: 2px solid black;
+    box-shadow: 2px 2px 2px 2px;
     width: 8vw;
     height: 16vh;
     font-size: 10vh;
