@@ -13,7 +13,6 @@ const gameFlow = (() => {
     game = gameBoard();
 
     function initializeGame() {
-        cells.forEach(cell => cell.addEventListener('click', cellClicked))
 
         function cellClicked() {
             const cellIndex = this.getAttribute('cellIndex');
@@ -24,20 +23,25 @@ const gameFlow = (() => {
             checkWinner();
         }
 
+        const updateCell = (cell, index) => {
+            game.options[index] = game.currentPlayer;
+            cell.textContent = game.currentPlayer;
+        }
+
+        const restartGame = () => {
+            game.options = ['', '', '', '', '', '', '', '', ''];
+            game.currentPlayer = 'X';
+            game.running = false;
+            statusTxt.textContent = `${game.currentPlayer}'s turn`;
+            cells.forEach(cell => {cell.textContent = ''});
+            initializeGame()
+        }
+
+        cells.forEach(cell => cell.addEventListener('click', cellClicked))
         resetBtn.addEventListener('click', restartGame);
         statusTxt.textContent = `${game.currentPlayer}'s turn`;
         game.running = true;
     }
-    
-    const updateCell = (cell, index) => {
-        game.options[index] = game.currentPlayer;
-        cell.textContent = game.currentPlayer;
-    }   
-
-    const changePlayer = () => {
-        game.currentPlayer = (game.currentPlayer == 'X') ? 'O' : 'X';
-        statusTxt.textContent = `${game.currentPlayer}'s turn`;
-    }  
 
     const checkWinner = () => {
         const winConditions = [
@@ -45,6 +49,7 @@ const gameFlow = (() => {
             [3,4,5], [1,4,7], [2,4,6],
             [6,7,8], [2,5,8]
         ];
+        
         let roundWon = false;
 
         for (let i = 0; i < winConditions.length; i++) {
@@ -69,18 +74,9 @@ const gameFlow = (() => {
             game.running = false;
         } 
         else {
-            changePlayer();
-        }
+            game.currentPlayer = (game.currentPlayer == 'X') ? 'O' : 'X';
+            statusTxt.textContent = `${game.currentPlayer}'s turn`;
+        }  
     }
-
-    const restartGame = () => {
-        game.options = ['', '', '', '', '', '', '', '', ''];
-        game.currentPlayer = 'X';
-        game.running = false;
-        statusTxt.textContent = `${game.currentPlayer}'s turn`;
-        cells.forEach(cell => {cell.textContent = ''});
-        initializeGame()
-    }
-
     initializeGame()
 })()
