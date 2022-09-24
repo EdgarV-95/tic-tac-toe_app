@@ -8,11 +8,11 @@
 .container {
     display: grid;
     grid-template-columns: repeat(3, auto);
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 .cell {
-    border: 1px solid black;
+    border: 2px solid black;
     width: 7.5vw;
     height: 12vh;
     font-size: 10vh;
