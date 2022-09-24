@@ -47,3 +47,55 @@ img {
     height: 12vh;
     cursor: pointer;
 }
+
+@media screen and (device-width: 390px) and (device-height: 844px) {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .gameContainer {
+        background-color: rgb(88, 172, 109);
+        display: flex;
+        /* justify-content: center; */
+        align-items: center;
+        flex-direction: column;
+        gap: 3vh;
+        width: 100vw;
+        height: 100vh;
+    }
+    
+    h1 {
+        padding-top: 3vh;
+        font-size: 8vh;
+        text-decoration: underline;
+    }
+    
+    .container {
+        margin-top: 6vh;
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        border: 2px solid black;
+    }
+    
+    .cell {
+        border: 2px solid black;
+        width: 27vw;
+        height: 13vh;
+        font-size: 10vh;
+        cursor: pointer;
+        text-align: center;
+        line-height: 16vh;
+    }
+    
+    h2 {
+        margin-top: 3vh;
+        font-size: 5vh;
+    }
+    
+    img {
+        width: 22vw;
+        height: 10vh;
+        cursor: pointer;
+    }
+ }
