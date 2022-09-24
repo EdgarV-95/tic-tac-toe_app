@@ -1,41 +1,8 @@
-// Create object with 2 functions one for X and one for O
-let allTds = document.querySelectorAll('.cell')
-
-const controlFlow = () => {
-    const move = (mark, option) => {
-        allTds.forEach(el => {
-            el.addEventListener('click', () => {
-                el.classList = mark
-                el.innerHTML = option
-            })
-        })
-    }
-    // Check
-    const playGame = () => {
-        let x = document.querySelectorAll('.X')
-        let o = document.querySelectorAll('.O')
-        console.log(x)
-        if ( x.length > o.length  ) {
-            console.log('swap to O')
-            game.move('cell O', 'O')
-        }
-        if ( o.length >= x.length ) {
-            console.log('swap to X')
-            game.move('cell X','X')
-        }
-        x.classList = 'cell'
-        o.classList = 'cell' 
-    }
-    return {move, playGame}
-}
-
-// Reset
-document.querySelector('.reset').addEventListener('click', () => {
-    allTds.forEach(el => {
-        el.innerHTML = ''
-    })
-})
-
-let game = controlFlow()
-game.move('cell X','X')
-document.querySelector('.container').addEventListener('click', game.playGame)
+const cells = document.querySelectorAll('.cell');
+const statusTxt = document.querySelector('.status');
+const resetBtn = document.querySelector('.reset');
+const winConditions = [
+    [0,1,2], [0,3,6], [0,4,8],
+    [3,4,5], [1,4,7], [2,4,6]
+    [6,7,8], [2,5,8],
+];
