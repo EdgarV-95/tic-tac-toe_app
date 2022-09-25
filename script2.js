@@ -1,11 +1,8 @@
-const player = (name) => {
-    const updateName = () => `${name}'s turn`;
-    return {name, updateName};
-}
-
 const initializeGame = (() => {
 
     const welcomePage = document.querySelector('.welcome-page');
+    const pvp = document.querySelector('.player-vs-player');
+    const pve = document.querySelector('.player-vs-ai');
     const gameContainer = document.querySelector('.gameContainer');
     const submitBtn = document.querySelector('.submit');
     const cells = document.querySelectorAll('.cell');
@@ -13,43 +10,33 @@ const initializeGame = (() => {
     const resetBtn = document.querySelector('.restartGame');
     const reloadBtn = document.querySelector('.reloadPage');
 
-    const gameTest = () => {
-        player1 = player(document.getElementById("player1").value);
-        player2 = player(document.getElementById("player2").value);
+    pvp.addEventListener('pointerdown', () => {
+        pvp.classList.add('active')
+        pve.classList.remove('active')
+    })
 
-        if(player1.name === '' || player2.name === '') {
-            alert('Must give player names')
-            return;
-        }
-        if(player1.name.length < 3 || player2.name.length < 3) {
-            alert('Names must be at least 3 characters long')
-            return;
-        }
-        if(player1.name === player2.name) {
-            alert('Cant have the same names')
-            return;
-        }
-        // const welcomePage = document.querySelector('.welcome-page');
+    pve.addEventListener('pointerdown', () => {
+        pve.classList.add('active')
+        pvp.classList.remove('active')
+    })
+
+    submitBtn.addEventListener('pointerdown', () => {
         welcomePage.style.opacity = '0';
         welcomePage.style.visibility = 'hidden';
-    
-        // const gameContainer = document.querySelector('.gameContainer');
         gameContainer.style.opacity = '1';
         gameContainer.style.visibility = 'visible';
-    }
-    submitBtn.addEventListener('click', gameTest)
+    })
 
     let gameIsRunning = false;
     let database = ['', '', '', '', '', '', '', '', ''];
     let currentPlayer = 'X';
-    let currentPlayerName = player1.name;
 
     function startGame() {
         gameIsRunning = true;
         statusTxt.textContent = `${currentPlayer}'s turn`
 
-        cells.forEach(cell => cell.addEventListener('click', cellClicked));
-        function cellClicked(e) {  
+        cells.forEach(cell => cell.addEventListener('pointerdown', faszomCell));
+        function faszomCell(e) {  
             let index = this.getAttribute('index');
     
             if((e.target.textContent == 'X' || e.target.textContent == 'O') || !gameIsRunning ) {
@@ -87,7 +74,7 @@ const initializeGame = (() => {
         }
         if(winner) {
             gameIsRunning = false;
-            statusTxt.textContent = `${currentPlayerName} has won this round!`;
+            statusTxt.textContent = `${currentPlayer} has won this round!`;
         }
         else if (!database.includes('')) {
             gameIsRunning = false;
@@ -96,16 +83,14 @@ const initializeGame = (() => {
         else {
             if (currentPlayer === 'X') {
                 currentPlayer = 'O';
-                currentPlayerName = player2.name;
             } else if (currentPlayer === 'O') {
                 currentPlayer = 'X';
-                currentPlayerName = player1.name;
             }
             statusTxt.textContent = `${currentPlayer}'s turn`;
         }
     }
 
-    resetBtn.addEventListener('click', () => {
+    resetBtn.addEventListener('pointerdown', () => {
         gameIsRunning = false;
         database = ['', '', '', '', '', '', '', '', ''];
         currentPlayer = 'X';
@@ -113,7 +98,7 @@ const initializeGame = (() => {
         startGame()
     })
 
-    reloadBtn.addEventListener('click', () => {
+    reloadBtn.addEventListener('pointerdown', () => {
         console.log('works')
         location.reload();
     })
