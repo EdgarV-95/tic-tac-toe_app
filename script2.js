@@ -1,9 +1,18 @@
+const player = (name) => {
+    const updateName = () => `${name}'s turn`;
+    return {name, updateName};
+}
+
 const initializeGame = (() => {
 
-    const player = (name) => {
-        const updateName = () => `${name}'s turn`;
-        return {name, updateName};
-    }
+    const welcomePage = document.querySelector('.welcome-page');
+    const gameContainer = document.querySelector('.gameContainer');
+    const submitBtn = document.querySelector('.submit');
+    const cells = document.querySelectorAll('.cell');
+    const statusTxt = document.querySelector('.status');
+    const resetBtn = document.querySelector('.restartGame');
+    const reloadBtn = document.querySelector('.reloadPage');
+
     const gameTest = () => {
         player1 = player(document.getElementById("player1").value);
         player2 = player(document.getElementById("player2").value);
@@ -20,19 +29,15 @@ const initializeGame = (() => {
             alert('Cant have the same names')
             return;
         }
-        let welcomePage = document.querySelector('.welcome-page');
+        // const welcomePage = document.querySelector('.welcome-page');
         welcomePage.style.opacity = '0';
         welcomePage.style.visibility = 'hidden';
     
-        let gameContainer = document.querySelector('.gameContainer');
+        // const gameContainer = document.querySelector('.gameContainer');
         gameContainer.style.opacity = '1';
         gameContainer.style.visibility = 'visible';
     }
-    document.querySelector('.submit').addEventListener('click', gameTest)
-
-    const cells = document.querySelectorAll('.cell');
-    const statusTxt = document.querySelector('.status');
-    const resetBtn = document.querySelector('.reset');
+    submitBtn.addEventListener('click', gameTest)
 
     let gameIsRunning = false;
     let database = ['', '', '', '', '', '', '', '', ''];
@@ -82,7 +87,6 @@ const initializeGame = (() => {
         }
         if(winner) {
             gameIsRunning = false;
-            // statusTxt.textContent = `Winner is: ${currentPlayer} !!`;
             statusTxt.textContent = `${currentPlayerName} has won this round!`;
         }
         else if (!database.includes('')) {
@@ -101,13 +105,18 @@ const initializeGame = (() => {
         }
     }
 
-    resetBtn.addEventListener('click', resetGame)
-    function resetGame() {
+    resetBtn.addEventListener('click', () => {
         gameIsRunning = false;
         database = ['', '', '', '', '', '', '', '', ''];
         currentPlayer = 'X';
         cells.forEach(cell => cell.textContent = '');
         startGame()
-    }
+    })
+
+    reloadBtn.addEventListener('click', () => {
+        console.log('works')
+        location.reload();
+    })
+
     startGame()
 })()

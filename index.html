@@ -10,11 +10,17 @@
 </head>
 <body>
     <div class="welcome-page">
-        <p>Welcome to my Tic-Tac-Toe Game</p>
-        <label for="player1">Player X: </label>
-        <input type="text" name="player1" id="player1">
-        <label for="player2">Player O: </label>
-        <input type="text" name="player2" id="player2">
+        <div class="welcome-txt"><p>Welcome to my Tic-Tac-Toe Game</p></div>
+        <div class="player-info">
+            <div class="player-info1">
+                <label class="player1" for="player1">Player X :</label>
+                <input type="text" name="player1" class="player1" id="player1">
+            </div>
+            <div class="player-info2">
+                <label class="player2" for="player2">Player O :</label>
+                <input type="text" name="player2" class="player2" id="player2">
+            </div>
+        </div>
         <button type="button" class="submit">Start Game</button>
     </div>
     <div class="gameContainer">
@@ -31,7 +37,10 @@
             <div index="8" class="cell"></div>
         </div>
         <h2 class="status"></h2>
-        <img class="reset" src="restart.png"></img>
+        <div class="bottomBtns">
+            <button class="restartGame">Restart Game</button>
+            <button class="reloadPage">New Game</button>
+        </div>
     </div>
 </body>
 </html>
