@@ -83,7 +83,7 @@ const initializeGame = (() => {
         if(winner) {
             gameIsRunning = false;
             // statusTxt.textContent = `Winner is: ${currentPlayer} !!`;
-            statusTxt.textContent = `Winner is: ${currentPlayerName} !!`;
+            statusTxt.textContent = `${currentPlayerName} has won this round!`;
         }
         else if (!database.includes('')) {
             gameIsRunning = false;
@@ -97,7 +97,7 @@ const initializeGame = (() => {
                 currentPlayer = 'X';
                 currentPlayerName = player1.name;
             }
-            // statusTxt.textContent = `${currentPlayer}'s turn`;
+            statusTxt.textContent = `${currentPlayer}'s turn`;
         }
     }
 
