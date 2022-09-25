@@ -1,4 +1,3 @@
-
 const gameBoard = (() => {
     const container = document.createElement('div');
     container.classList.add('container');
@@ -17,7 +16,7 @@ const gameBoard = (() => {
     document.querySelector('h1').insertAdjacentElement('afterend', container)
 })()
 
-const displayController = (() => {
+const initializeGame = (() => {
     const cells = document.querySelectorAll('.cell');
     const statusTxt = document.querySelector('.status');
     const resetBtn = document.querySelector('.reset');
@@ -28,74 +27,70 @@ const displayController = (() => {
 
     function startGame() {
         gameIsRunning = true;
-        statusTxt.textContent = `${currentPlayer}'s turn`;
+        statusTxt.textContent = `${currentPlayer}'s turn`
 
-        cells.forEach(cell => cell.addEventListener('click', clickCell))
-        function clickCell() {
-            const index = this.getAttribute('index');
-
-            if (database[index] != '' || !gameIsRunning ) {
-                return;
+        cells.forEach(cell => cell.addEventListener('click', cellClicked));
+        function cellClicked(e) {    
+            let index = this.getAttribute('index');
+    
+            if((e.target.textContent == 'X' || e.target.textContent == 'O') || !gameIsRunning ) {
+                return
             }
-            updateCell(this, index);
-            checkWinner();
-        }
-
-        const updateCell = (cell, index) => {
-            database[index] = currentPlayer;
-            cell.textContent = currentPlayer;
-        }
-
-        resetBtn.addEventListener('click', resetGame);
-        function resetGame() {
-            database = ['', '', '', '', '', '', '', '', ''];
-            currentPlayer = 'X';
-            gameIsRunning = false;
-            statusTxt.textContent = `${currentPlayer}'s turn`;
-            cells.forEach(cell => {cell.textContent = ''});
-            startGame()
+            e.target.innerHTML = currentPlayer;
+            database.splice(index, 1, e.target.innerHTML)
+            checkWinner()        
         }
     }
 
-    const checkWinner = () => {
+    function checkWinner() {
+        let winner = false;
+
         const winningPatterns = [
             [0,1,2], [0,3,6], [0,4,8],
             [3,4,5], [1,4,7], [2,4,6],
             [6,7,8], [2,5,8]
         ];
-        
-        let wonGame = false;
 
-        for (let i = 0; i < winningPatterns.length; i++) {
+        for(let i = 0; i < winningPatterns.length; i++) {
             let pattern = winningPatterns[i];
-            let cellOne = database[pattern[0]];
-            let cellTwo = database[pattern[1]];
-            let cellThree = database[pattern[2]];
+            let cell0 = database[pattern[0]];
+            let cell1 = database[pattern[1]];
+            let cell2 = database[pattern[2]];
 
-            if (cellOne == '' || cellTwo == '' || cellThree == '') {
+            if(cell0 == '' || cell1 == '' || cell2 == ''){
                 continue;
             }
-            if (cellOne == cellTwo && cellTwo == cellThree ) {
-                wonGame = true;
+
+            if(cell0 == cell1 && cell1 == cell2) {
+                winner = true;
                 break;
             }
         }
-        if (wonGame) {
+        if(winner) {
             gameIsRunning = false;
-            statusTxt.textContent = `${currentPlayer} wins!`;
-        } 
+            statusTxt.textContent = `Winner is: ${currentPlayer} !!`;
+        }
         else if (!database.includes('')) {
             gameIsRunning = false;
-            statusTxt.textContent = 'Draw';
+            statusTxt.textContent = `Draw !!`
         }
         else {
-            if (currentPlayer == 'X') {
-                currentPlayer = 'O'
-            } else {
-                currentPlayer = 'X'
-            };
+            if (currentPlayer === 'X') {
+                currentPlayer = 'O';
+            } else if (currentPlayer === 'O') {
+                currentPlayer = 'X';
+            }
             statusTxt.textContent = `${currentPlayer}'s turn`;
-        }  
+        }
+    }
+
+    resetBtn.addEventListener('click', resetGame)
+    function resetGame() {
+        gameIsRunning = false;
+        database = ['', '', '', '', '', '', '', '', ''];
+        currentPlayer = 'X';
+        cells.forEach(cell => cell.textContent = '');
+        startGame()
     }
     startGame()
 })()

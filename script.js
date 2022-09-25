@@ -48,23 +48,20 @@ const displayController = (() => {
         // Clicking on any of the cells from inside the container will invoke clickCell
         cells.forEach(cell => cell.addEventListener('click', clickCell))
 
-        function clickCell() {
+        function clickCell(e) {
             // Gets the attribute value of the "index" that has been clicked by the player
             const index = this.getAttribute('index');
 
             // I am using the "index" value of the cell as an index for the "database" array
             // if "database[index]"" is empty or "gameIsRunning" is set to true then carry on
-            if (database[index] != '' || !gameIsRunning ) {
-                return;
+            if((e.target.textContent == 'X' || e.target.textContent == 'O') || !gameIsRunning ) {
+                return
             }
-            updateCell(this, index);
-            checkWinner();
-        }
-
-        // Updates both the database at the index given and the cell text on the board
-        const updateCell = (cell, index) => {
-            database[index] = currentPlayer;
-            cell.textContent = currentPlayer;
+            // Updates the cell cliedk with the valueof current player
+            e.target.innerHTML = currentPlayer;
+            // Updates the database at the index given withthe value of the cell clicked
+            database.splice(index, 1, e.target.innerHTML)
+            checkWinner()     
         }
 
         // Resets everything back to default
