@@ -5,12 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <script src="script2.js" defer></script>
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
+    <div class="welcome-page">
+        <p>Welcome to my Tic-Tac-Toe Game</p>
+        <label for="player1">Player X: </label>
+        <input type="text" name="player1" id="player1">
+        <label for="player2">Player O: </label>
+        <input type="text" name="player2" id="player2">
+        <button type="button" class="submit">Start Game</button>
+    </div>
     <div class="gameContainer">
         <h1>Tic-Tac-Toe</h1>
+        <div class="container">
+            <div index="0" class="cell"></div>
+            <div index="1" class="cell"></div>
+            <div index="2" class="cell"></div>
+            <div index="3" class="cell"></div>
+            <div index="4" class="cell"></div>
+            <div index="5" class="cell"></div>
+            <div index="6" class="cell"></div>
+            <div index="7" class="cell"></div>
+            <div index="8" class="cell"></div>
+        </div>
         <h2 class="status"></h2>
         <img class="reset" src="restart.png"></img>
     </div>
