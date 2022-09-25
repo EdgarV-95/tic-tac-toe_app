@@ -35,8 +35,8 @@ const initializeGame = (() => {
         gameIsRunning = true;
         statusTxt.textContent = `${currentPlayer}'s turn`
 
-        cells.forEach(cell => cell.addEventListener('pointerdown', faszomCell));
-        function faszomCell(e) {  
+        cells.forEach(cell => cell.addEventListener('pointerdown', cellIndex));
+        function cellIndex(e) {  
             let index = this.getAttribute('index');
     
             if((e.target.textContent == 'X' || e.target.textContent == 'O') || !gameIsRunning ) {
